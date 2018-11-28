@@ -60,6 +60,8 @@ sudo bash setup.sh config.txt
 ```
 16. Follow https://developer.amazon.com/docs/alexa-voice-service/build-the-avs-device-sdk.html for the rest of the installation process
 
+*Referenced from https://github.com/carolinedunn/Alexa-RPi-AutoStart*
+
 
 ## To Run Alexa
 ### If you do not have the Refresh token yet:
@@ -105,6 +107,8 @@ sudo make
 ``` 
 10. Once the Sample App rebuilds, restart Alexa: ``sudo bash /home/pi/startsample.sh``
 
+*Referenced from https://github.com/carolinedunn/Alexa-RPi-AutoStart*
+
 ## To Autoboot Alexa
 1. Stop Alexa if it is running with Ctrl-c and make a copy of the original .bashrc just in case: ``cp /home/pi.bashrc /home/pi/.bashrc-original``
 2. Edit the .bashrc file with ``sudo nano /home/pi/.bashrc``
@@ -112,6 +116,8 @@ sudo make
 4. Save (Ctrl-o) and exit (Ctrl-x)
 5. Enter ``sudo raspi-config`` in terminal -> select ``3 Boot Options`` -> select ``B1 Desktop/ CLI`` -> select ``B2 Console Autologin``
 6. ``<Finish>`` and select ``<yes>`` to reboot the Raspberry Pi
+
+*Referenced from https://github.com/carolinedunn/Alexa-RPi-AutoStart*
 
 ## Customizing Alexa
 1. To set your location for weather and traffic data, follow https://developer.amazon.com/docs/alexa-voice-service/set-device-location.html
