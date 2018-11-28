@@ -20,6 +20,7 @@ Alexa is ran in the background of the Smart Mirror.
 - Monitor
 - Keyboard
 - Mouse
+
 *Referenced from: https://developer.amazon.com/docs/alexa-voice-service/required-hardware.html*
 
 1. Follow https://developer.amazon.com/docs/alexa-voice-service/set-up-raspberry-pi.html to setup Raspbian OS and the Raspberry Pi
@@ -71,17 +72,49 @@ sudo bash /home/pi/startsample.sh
 ```
 
 *Reference https://developer.amazon.com/docs/alexa-voice-service/talk-with-alexa.html should you have any issues communicating with Alexa.*
+
 ## To Add Wake Sound
 1. For wake sound, follow https://developer.amazon.com/docs/alexa-voice-service/indicate-device-state-with-sounds.html
 
 ## To Add Notification of Boot Up
-1. 
+1. Stop Alexa if it is running with Ctrl-c and download sound file from terminal:
+```bash
+wget https://raw.githubusercontent.com/juliebee1024/smart-mirror-alexa/master/hello.wav
+```
+2. Open File Manager and move **hello.wav** from ``/home/pi/Downloads`` folder to ``/home/pi/sounds`` folder
+3. If you do not have permission to move files into the sounds folder, enter in terminal ``sudo chown -R pi:pi /home/pi`` and try step 2 again
+4. Navigate to ``cd /home/pi/avs-device-sdk/SampleApp/src/`` and ``nano UIManager.cpp``
+5. Double check to make sure ``#include <cstdlib>`` is included in the beginning of **UIManager.cpp** -- if not, add it in
+6. Scroll down to ``void UIManager::printState()`` function
+7. Find
+```cpp
+} else if (m_connectionStatus == avsCommon::sdkInterfaces::ConnectionStatusObserverInterface::Status::PENDING) {
+ConsolePrinter::prettyPrint("Connecting...");
+```
+and add in ``system("play /home/pi/sounds/hello.wav");`` such that it looks like this:
+```cpp
+} else if (m_connectionStatus == avsCommon::sdkInterfaces::ConnectionStatusObserverInterface::Status::PENDING) {
+ConsolePrinter::prettyPrint("Connecting...");
+system("play /home/pi/sounds/hello.wav"); //sound file for notification of bootup
+```
+8. Save the file (Ctrl-o) and close (Ctrl-x)
+9. Rebuild the Sample App for changes to take effect:
+```cpp
+cd /home/pi/build/SampleApp
+sudo make
+``` 
+10. Once the Sample App rebuilds, restart Alexa: ``sudo bash /home/pi/startsample.sh``
+
 ## To Autoboot Alexa
+1. Stop Alexa if it is running with Ctrl-c and make a copy of the original .bashrc just in case: ``cp /home/pi.bashrc /home/pi/.bashrc-original``
+2. Edit the .bashrc file with ``sudo nano /home/pi/.bashrc``
+3. Scroll all the way to the bottom of the file and add in ``sudo bash /home/pi/startsample.sh`` on a new line after the final ``fi``
+4. Save (Ctrl-o) and exit (Ctrl-x)
+5. Enter ``sudo raspi-config`` in terminal -> select ``3 Boot Options`` -> select ``B1 Desktop/ CLI`` -> select ``B2 Console Autologin``
+6. ``<Finish>`` and select ``<yes>`` to reboot the Raspberry Pi
 
 ## Customizing Alexa
 1. To set your location for weather and traffic data, follow https://developer.amazon.com/docs/alexa-voice-service/set-device-location.html
 2. To adjust sound sensitivity of the mic, type ``alsamixer`` in terminal
 3. To force sound through 3.5mm audio jack or HDMI, type ``sudo raspi-config`` in terminal -> select ``7 Advanced Options`` -> select ``A4 Audio`` -> choose either ``1`` or ``2`` depending on what you want
-4. 
-
-## Commands
+4. To train Alexa to your voice for a better sensitivity say "Learn my voice" and follow Alexa's instructions to create your voice profile (more information found: https://www.amazon.com/gp/help/customer/display.html/ref=hp_bc_nav?ie=UTF8&nodeId=202199440)
