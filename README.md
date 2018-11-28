@@ -23,42 +23,42 @@ Alexa is ran in the background of the Smart Mirror.
 
 *Referenced from: https://developer.amazon.com/docs/alexa-voice-service/required-hardware.html*
 
-1. Follow https://developer.amazon.com/docs/alexa-voice-service/set-up-raspberry-pi.html to setup Raspbian OS and the Raspberry Pi
-
 ### Required Software
+- Raspbian OS
 - AVS Device SDK
-1. Run ` sudo apt-get upgrade ` to get the necessary updates on terminal in the Raspberry Pi
-2. Get necessary files:
+1. Follow https://developer.amazon.com/docs/alexa-voice-service/set-up-raspberry-pi.html to setup Raspbian OS and the Raspberry Pi
+2. With Raspbian OS loaded, run ` sudo apt-get upgrade ` in terminal to get the necessary updates in the Raspberry Pi
+3. Get necessary files:
 ```bash
 wget https://raw.githubusercontent.com/juliebee1024/smart-mirror-alexa/master/pi.sh \
 wget https://raw.githubusercontent.com/juliebee1024/smart-mirror-alexa/master/setup.sh
 ```
-3. Create a config file:
+4. Create a config file:
 ```bash
 sudo nano config.txt
 ```
-4. Copy and paste into the config file:
+5. Copy and paste into the config file:
 ```
 #NOTE: The Device Serial Number can be any unique number
 DEVICE_SERIAL_NUMBER=""
 CLIENT_ID=""
 PRODUCT_ID=""
 ```
-5. Open a web browser and login to Amazon Developer (https://developer.amazon.com/avs/home.html#/avs/home) and click on your product
-6. Scroll down and copy & paste the **Product ID** into config.txt
-7. Click on "**Security Profile**" under the "Product Details" tab
-8. Scroll down and click on "**Other devices and platforms**"
-9. Copy & paste the **Client ID** into config.txt
-10. Enter any number (i.e. 123456) as the **Device Serial Number**
-11. Ctrl-o and enter to save
-12. Ctrl-x to exit
-13. Follow https://developer.amazon.com/docs/alexa-voice-service/input-avs-credentials.html starting at "**Download your credentials**" to get the config.json file
-14. In terminal, run the install script
+6. Open a web browser and login to Amazon Developer (https://developer.amazon.com/avs/home.html#/avs/home) and click on your product
+7. Scroll down and copy & paste the **Product ID** into config.txt
+8. Click on "**Security Profile**" under the "Product Details" tab
+9. Scroll down and click on "**Other devices and platforms**"
+10. Copy & paste the **Client ID** into config.txt
+11. Enter any number (i.e. 123456) as the **Device Serial Number**
+12. Ctrl-o and enter to save
+13. Ctrl-x to exit
+14. Follow https://developer.amazon.com/docs/alexa-voice-service/input-avs-credentials.html starting at "**Download your credentials**" to get the config.json file
+15. In terminal, run the install script
 ```bash
 cd /home/pi
 sudo bash setup.sh config.txt
 ```
-15. Follow https://developer.amazon.com/docs/alexa-voice-service/build-the-avs-device-sdk.html for the rest of the installation process
+16. Follow https://developer.amazon.com/docs/alexa-voice-service/build-the-avs-device-sdk.html for the rest of the installation process
 
 
 ## To Run Alexa
