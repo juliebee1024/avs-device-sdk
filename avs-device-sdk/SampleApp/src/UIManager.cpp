@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <cstdlib> //for notification of bootup and wake sound
 
 #include "SampleApp/UIManager.h"
 
@@ -462,6 +463,7 @@ void UIManager::printState() {
         ConsolePrinter::prettyPrint("Client not connected!");
     } else if (m_connectionStatus == avsCommon::sdkInterfaces::ConnectionStatusObserverInterface::Status::PENDING) {
         ConsolePrinter::prettyPrint("Connecting...");
+	system("play /home/pi/sounds/hello.wav"); //for notification of boot up
     } else if (m_connectionStatus == avsCommon::sdkInterfaces::ConnectionStatusObserverInterface::Status::CONNECTED) {
         switch (m_dialogState) {
             case DialogUXState::IDLE:
@@ -469,6 +471,7 @@ void UIManager::printState() {
                 return;
             case DialogUXState::LISTENING:
                 ConsolePrinter::prettyPrint("Listening...");
+		system("play /home/pi/sounds/med_ui_wakesound.wav"); //for wake sound
                 return;
             case DialogUXState::EXPECTING:
                 ConsolePrinter::prettyPrint("Expecting...");
