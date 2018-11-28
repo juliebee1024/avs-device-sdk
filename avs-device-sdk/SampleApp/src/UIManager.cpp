@@ -463,7 +463,7 @@ void UIManager::printState() {
         ConsolePrinter::prettyPrint("Client not connected!");
     } else if (m_connectionStatus == avsCommon::sdkInterfaces::ConnectionStatusObserverInterface::Status::PENDING) {
         ConsolePrinter::prettyPrint("Connecting...");
-	system("play /home/pi/sounds/hello.wav"); //for notification of boot up
+	system("play /home/pi/sounds/hello.wav"); //for notification of bootup
     } else if (m_connectionStatus == avsCommon::sdkInterfaces::ConnectionStatusObserverInterface::Status::CONNECTED) {
         switch (m_dialogState) {
             case DialogUXState::IDLE:
